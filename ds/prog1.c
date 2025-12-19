@@ -38,13 +38,25 @@ void display(struct Day *calendar, int size) {
         printf("Activity: %s\n", calendar[i].activity);
     }
 }
+void freeMemory(struct Day *calendar,int size){
+for(int i=0;i<size;i++){
+free(calendar[i].dayName);
+free(calendar[i].activity);
+}
+}
+int main(){
+int size;
+printf("Enter the number of days in the week:");
+scanf("%d",&size);
 
-int main() {
-    int size = 7;   // one week
-    struct Day calendar[7];
-
-    read(calendar, size);
-    display(calendar, size);
-
-    return 0;
+struct Day *calendar=(struct Day*)malloc(sizeof(struct Day)*size);
+if(calendar==NULL){
+printf("Memory allocation failed exiting program.\n");
+return 1;
+}
+read(calendar,size);
+display(calendar,size);
+freeMemory(calendar,size);
+free(calendar);
+return 0;
 }
