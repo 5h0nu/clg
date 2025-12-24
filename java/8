@@ -1,0 +1,56 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package khasim.program.pkg8;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author cs007
+ */
+public class OuterClass {
+    
+    private String outerMessage;
+    
+    public OuterClass(String outerMessage){
+        this.outerMessage=outerMessage;
+    }
+    public void display(){
+        System.out.println("outer class display:"+outerMessage);
+        
+    }
+    
+    class Inner{
+        private String innerMessage;
+        
+        public Inner(String innerMessage){
+            this.innerMessage=innerMessage;
+    }
+        
+        
+    public void display(){
+        System.out.println("Ineer class display"+innerMessage);
+        
+    }
+}
+
+public static void main(String[]args){
+Scanner scanner=new Scanner(System.in);
+System.out.println("Enter a message for the outer class:");
+String outerMsg=scanner.nextLine();
+OuterClass outer =new OuterClass(outerMsg);
+
+System.out.println("Enter a message for the inner class:");
+String innerMsg=scanner.nextLine();
+
+OuterClass.Inner inner=outer.new Inner(innerMsg);
+
+System.out.println("calling display methods");
+outer.display();
+inner.display();
+
+scanner.close();
+}
+}
