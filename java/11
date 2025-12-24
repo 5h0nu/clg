@@ -1,0 +1,50 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package khasim.program.pkg11;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author cs007
+ */
+public class RunnableThreadExample {
+    static class MyRunnable implements Runnable{
+        private String threadName;
+        public MyRunnable(String threadName){
+            this.threadName=threadName;
+        }
+        
+        @Override
+        
+        public void run(){
+            System.out.println(threadName+"is running.");
+            try{
+                Thread.sleep(500);
+            }catch(InterruptedException e){
+                System.out.println(threadName+"was interrupted");
+            }
+                System.out.println(threadName+"has finished running.");
+            }
+        }
+        
+        public static void main(String[]args){
+            Scanner scanner=new Scanner(System.in);
+            System.out.println("Enter number of thread to create:");
+            int n=scanner.nextInt();
+            scanner.nextLine();
+            
+            for(int i=1;i<=n;i++){
+                scanner.nextLine();
+                System.out.println("Enter name for thread"+i+":");
+                String name=scanner.nextLine();
+                
+                Thread t=new Thread(new MyRunnable(name));
+                t.start();
+            }
+            scanner.close();
+        }
+    }
+
