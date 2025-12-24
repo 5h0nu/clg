@@ -1,0 +1,68 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package khasim.program.pkg7;
+import java.util.Scanner;
+/**
+ *
+ * @author cs007
+ */
+public class ResizeableDemo {
+    private String widht;
+    private int width;
+    private String height;
+    
+    interface Resizeable {
+        void resizeWidth(int width);
+        void resizeHeight(int height);
+    }
+    
+    static class Rectangle implements Resizeable{
+        private int width;
+        private int height;
+        
+        public Rectangle(int width,int height){
+            this.width=width;
+            this.height=height;
+    }
+    //resize
+    public void resizeWidth(int width){
+        this.width=width;
+        System.out.println("Width resized to:"+this.width);
+    }
+    ///rehight
+    public void resizeHeight(int height){
+        this.height=height;
+        System.out.println("Height resized to:"+this.height);
+    }
+    
+    //dimenstion
+    public void display(){
+        System.out.println("Rectangle width:"+width+",height:"+height);
+    }
+    }
+
+public static void main(String[]args){
+    Scanner scanner=new Scanner(System.in);
+
+System.out.print("Enter initail width of rectangle:");
+int initialWidth =scanner.nextInt();
+System.out.print("Enter initail height of rectangle:");
+int initialHeight =scanner.nextInt();
+
+Rectangle rect=new Rectangle(initialWidth,initialHeight);
+rect.display();
+
+System.out.print("Enter new width to resize:");
+int newWidth=scanner.nextInt();
+rect.resizeWidth(newWidth);
+//resize
+System.out.print("Enter new height to resize:");
+int newHeight=scanner.nextInt();
+rect.resizeHeight(newHeight);
+
+rect.display();
+scanner.close();
+}
+}
