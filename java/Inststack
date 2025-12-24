@@ -1,0 +1,89 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package khasim;
+import java.util.Scanner;
+/**
+ *
+ * @author cs007
+ */
+public class Intstack {
+    private int[] stack;
+    private int top;
+    private static final int MAX=10;
+    
+    // constructor
+    public Intstack(){
+        stack=new int[MAX];
+        top=-1;
+    }
+    //push
+    public void push(int value){
+        if (top==MAX-1){
+            System.Out.println("Stack Overflow! cannot push"+value);
+        }else{
+            stack[++top]=value;
+            System.out.println("pushed:"+value);
+        }
+    }
+    //pop method
+    public int pop(){
+        if (top==-1){
+            return -1;
+        }else{
+            int poppedValue = stack[top--];
+            System.out.println("popped:"+poppedValue);
+            return poppedValue;
+        }
+    }
+    //display
+    public void display(){
+        if(top==-1){
+            System.out.println("stack is empty");
+        }else{
+            System.out.println("current stack:");
+            for(int i=top;i>=0;i--){
+                System.out.println(stack[i]);
+            }
+        }
+    }
+    
+    //main method with scanner
+    public static void main(string[]args){
+        Scanner scanner = new scanner (system.in);
+        Intstack stack =new Intstack();
+        int choice;
+        do{
+            System.out.println("1.push");
+            System.out.println("2.pop");
+            System.out.println("3.Display");
+            System.out.println("4.exit");
+            System.out.println("Enter your choice(1-4):");
+            choice=Scanner.nextInt();
+            
+            switch(choice){
+                case 1:
+                    System.out.println("enter value to push");
+                    int value = Scanner.nextInt();
+                    stack.push(value);
+                    break;
+                    
+                case 2:
+                    stack.pop();
+                    break;
+                case 3:
+                    stack.display();
+                    break;
+                case 4:
+                    System.out.println("Exiting program");
+                    break;
+                    
+                default:
+                    System.out.println("Invalid choice please enter 1-4");
+            }
+        }
+        while (choice !=4);
+        Scanner.close();
+    }
+}
