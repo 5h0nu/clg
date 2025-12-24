@@ -1,0 +1,38 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package khasim.program.pkg4;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author cs007
+ */
+public class TestMyPoint {
+        public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        //input
+        System.out.print("Enter x for point 1:");
+        int x1=sc.nextInt();
+        System.out.print("Enter y for point 1:");
+        int y1=sc.nextInt();
+        MyPoint p1=new MyPoint(x1,y1);
+        
+        
+        System.out.print("Enter x for point 2:");
+        int x2 =sc.nextInt();
+        System.out.print("Enter y for point 2:");
+        int y2 =sc.nextInt();
+        MyPoint p2=new MyPoint(x2,y2);
+        
+        System.out.println("\npoint 1:"+p1);
+        System.out.println("\npoint 2:"+p2);
+        
+        System.out.println("Distance from point 1 to origin:"+p1.distance());
+        System.out.println("Distance from point 2 to origin:"+p2.distance());
+        System.out.println("Distance from point 1 to origin:"+p1.distance(p2));
+        sc.close();
+    }
+}
