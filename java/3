@@ -1,0 +1,60 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package khsaim.program3;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author cs007
+ */
+public class Employee {
+   private int id;
+   private String name;
+   private double salary;
+   
+   public Employee(int id,String name,double salary){
+       this.id=id;
+       this.name=name;
+       this.salary=salary;
+   }
+   public void raiseSalary(double percent){
+       if(percent>0){
+           salary+=salary *percent/100;
+           System.out.println("Salary increased by "+percent+ "%");
+       }else{
+           System.out.println("Percentage must be positive");
+       }
+   }
+   public void display(){
+       System.out.println("Employee ID:"+id);
+       System.out.println("Name :"+name);
+       System.out.println("Salary :"+salary);
+   }
+   public static void main(String[]args){
+       Scanner scanner=new Scanner(System.in);
+       System.out.println("Enter employee ID:");
+       int id=scanner.nextInt();
+       scanner.nextLine();
+       
+       System.out.println("Enter empolyee name:");
+       String name=scanner.nextLine();
+       System.out.println("Enter empolyee salary");
+       double salary=scanner.nextDouble();
+       
+       Employee emp=new Employee(id,name,salary);
+       System.out.println("\nInitail Employee Details:");
+       emp.display();
+       
+       System.out.println("\nEnter percentage to raise salary:");
+       double percent=scanner.nextDouble();
+       emp.raiseSalary(percent);
+       
+       //display
+       System.out.println("\nUpdated Employee Details");
+       emp.display();
+       scanner.close();
+   }
+}
