@@ -1,0 +1,22 @@
+import plotly.graph_objects as go
+# Sample data
+cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix']
+latitudes = [40.7128, 34.0522, 41.8781, 29.7604, 33.4484]
+longitudes = [-74.0060, -118.2437, -87.6298, -95.3698, -112.0740]
+populations = [8398748, 3990456, 2705994, 2325502, 1680992]
+# Create the map
+fig = go.Figure()
+# Add scatter trace for cities
+fig.add_trace(go.Scattergeo(
+lon=longitudes,
+lat=latitudes, text=cities,
+mode='markers',
+marker=dict(
+size=[pop/100000 for pop in populations], # Divide each population by 100000
+color='rgb(255, 0, 0)',
+line=dict( width=3,
+color='rgba(68, 68, 68, 0)'
+)
+
+)
+))
