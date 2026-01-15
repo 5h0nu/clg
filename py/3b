@@ -1,0 +1,7 @@
+import difflib
+str1 = "Welcome to Computer Science" 
+str2 = "Welcome to Computer Network"
+sequence = difflib.SequenceMatcher(a=str1.lower(), b=str2.lower())
+difference = sequence.ratio()*100
+difference = round(difference,1)
+print("Similarity between two said strings:"+str(difference))
