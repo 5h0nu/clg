@@ -1,0 +1,7 @@
+import matplotlib.pyplot as plt 
+labels = ['A', 'B', 'C', 'D']
+sizes = [15, 30, 45, 10]
+colors=['blue','yellow','green','red']
+plt.pie(sizes, colors=colors,labels=labels, autopct="%1.1f%%") 
+plt.title("Pie Chart")
+plt.show()
