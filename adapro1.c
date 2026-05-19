@@ -74,7 +74,7 @@ int main() {
 }
 
 
-//3rd program
+//3rd  A program
 
 #include <stdio.h>
 
@@ -97,6 +97,37 @@ int main() {
                     a[i][j] = a[i][k] + a[k][j];
 
     printf("\nShortest path matrix:\n");
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++)
+            printf("%d ", a[i][j]);
+        printf("\n");
+    }
+    return 0;
+}
+
+
+// 3 B 
+
+#include <stdio.h>
+
+int main() {
+    int a[10][10], n;
+
+    printf("Enter n: ");
+    if (scanf("%d", &n) != 1) return 1;
+
+    printf("Enter graph data:\n");
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= n; j++)
+            scanf("%d", &a[i][j]);
+
+    // Warshall's Algorithm
+    for (int k = 1; k <= n; k++)
+        for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= n; j++)
+                a[i][j] = a[i][j] || (a[i][k] && a[k][j]);
+
+    printf("\nResultant path matrix:\n");
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++)
             printf("%d ", a[i][j]);
