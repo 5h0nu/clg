@@ -135,3 +135,40 @@ int main() {
     }
     return 0;
 }
+
+// program 4 
+
+#include <stdio.h>
+
+int main() {
+    int c[10][10], d[10], v[10] = {0}, n, s, u, min;
+
+    printf("Enter n: ");
+    scanf("%d", &n);
+
+    printf("Enter graph data:\n");
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= n; j++)
+            scanf("%d", &c[i][j]);
+
+    printf("Enter source node: ");
+    scanf("%d", &s);
+
+    // Initialization
+    for (int i = 1; i <= n; i++) d[i] = c[s][i];
+    v[s] = 1;
+
+    // Dijkstra's Algorithm
+    for (int i = 1; i < n; i++) {
+        min = 999;
+        for (int j = 1; j <= n; j++)
+            if (!v[j] && d[j] < min) { min = d[j]; u = j; }
+            
+        v[u] = 1;
+        for (int j = 1; j <= n; j++)
+            if (!v[j] && (d[u] + c[u][j] < d[j])) d[j] = d[u] + c[u][j];
+    }
+
+    printf("\nShortest distances from source node %d:\n", s);
+    for (int i = 1; i <= n; i++) printf("Node %d: %d\n", i, d[i]);
+}
