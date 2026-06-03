@@ -86,7 +86,8 @@ void main()
 OUTPUT: 
  
 Enter number of elements (n): 6 
-Enter elements S1, S2, ..., Sn: 1 2 3 4 5 6 Enter target sum (d): 6 Subsets of S with sum 6: 
+Enter elements S1, S2, ..., Sn: 1 2 3 4 5 6
+Enter target sum (d): 6 Subsets of S with sum 6: 
 Subset: 1 2 3  
 Subset: 1 5  
 Subset: 2 4  
