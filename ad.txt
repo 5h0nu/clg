@@ -95,3 +95,209 @@ Subset: 6
 
 
 ///9
+
+
+#include <stdio.h>
+#include <sys/time.h>
+
+void selsort(int a[], int n) {
+    for (int j = 0; j < n - 1; j++) {
+        int small = a[j], pos = j;
+        for (int i = j + 1; i < n; i++)
+            if (a[i] < small) { small = a[i]; pos = i; }
+        int temp = a[j]; a[j] = a[pos]; a[pos] = temp;
+    }
+}
+
+int main() {
+    int n, a[10000];
+    struct timeval start, end;
+
+    printf("\nEnter the n value: ");
+    if (scanf("%d", &n) != 1) return 1;
+    if (n > 10000) { printf("Array size too large, reducing it to 10000.\n"); n = 10000; }
+
+    printf("\nEnter the array: ");
+    for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+
+    gettimeofday(&start, NULL);
+    selsort(a, n);
+    gettimeofday(&end, NULL);
+
+    long sec = end.tv_sec - start.tv_sec;
+    long usec = end.tv_usec - start.tv_usec;
+    if (usec < 0) { sec--; usec += 1000000; }
+
+    printf("\nTime taken is: %ld seconds and %ld microseconds\n\nSorted array is: ", sec, usec);
+    for (int i = 0; i < n; i++) printf("%d ", a[i]);
+    printf("\n");
+    return 0;
+}
+
+//output
+OUTPUT: 
+Enter the n value: 5 
+ 
+Enter the array: 10 2 3 15 12 
+ 
+Time taken is: 0.000002 seconds 
+Sorted array is: 2 3 10 12 15 
+
+
+///10
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#include <time.h>
+
+void Exch(int *p, int *q) { int t = *p; *p = *q; *q = t; }
+
+void QuickSort(int a[], int low, int high) {
+    if (low >= high) return;
+    int i = low + 1, j = high, key = low;
+    while (i <= j) {
+        while (a[i] <= a[key] && i <= high) i++;
+        while (a[j] > a[key] && j >= low) j--;
+        if (i < j) Exch(&a[i], &a[j]);
+    }
+    Exch(&a[j], &a[key]);
+    QuickSort(a, low, j - 1);
+    QuickSort(a, j + 1, high);
+}
+
+int main() {
+    int n, k;
+    struct timeval start, end;
+    
+    printf("\nEnter how many numbers: ");
+    if (scanf("%d", &n) != 1) return 1;
+
+    int *a = (int *)malloc(n * sizeof(int));
+    srand(time(NULL));
+
+    printf("\nThe Random Numbers are:\n");
+    for (k = 0; k < n; k++) printf("%d ", a[k] = rand());
+
+    gettimeofday(&start, NULL);
+    QuickSort(a, 0, n - 1);
+    gettimeofday(&end, NULL);
+
+    long sec = end.tv_sec - start.tv_sec;
+    long usec = end.tv_usec - start.tv_usec;
+    if (usec < 0) { sec--; usec += 1000000; }
+    double ts = sec + (usec / 1000000.0); // Fixed uninitialized variable bug
+
+    printf("\nTime taken is: %ld seconds and %ld microseconds\n", sec, usec);
+    printf("\nSorted Numbers are: \n");
+    for (k = 0; k < n; k++) printf("%d ", a[k]);
+    printf("\nThe time taken is %f seconds\n", ts);
+
+    free(a);
+    return 0;
+}
+
+////output 
+
+Enter How many Numbers: 50  
+
+
+///pro 11
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
+
+void Merge(int a[], int low, int mid, int high) {
+    int i = low, j = mid + 1, k = 0, b[high - low + 1];
+    while (i <= mid && j <= high) b[k++] = (a[i] <= a[j]) ? a[i++] : a[j++];
+    while (i <= mid) b[k++] = a[i++];
+    while (j <= high) b[k++] = a[j++];
+    for (i = low, k = 0; i <= high; i++, k++) a[i] = b[k];
+}
+
+void MergeSort(int a[], int low, int high) {
+    if (low < high) {
+        int mid = (low + high) / 2;
+        MergeSort(a, low, mid);
+        MergeSort(a, mid + 1, high);
+        Merge(a, low, mid, high);
+    }
+}
+
+int main() {
+    int n, a[2000], k;
+    struct timeval start, end;
+
+    printf("\nEnter How many Numbers: ");
+    if (scanf("%d", &n) != 1) return 1;
+
+    printf("\nThe Random Numbers are:\n");
+    for (k = 0; k < n; k++) printf("%d\t", a[k] = rand() % 100);
+
+    gettimeofday(&start, NULL);
+    MergeSort(a, 0, n - 1);
+    gettimeofday(&end, NULL);
+
+    long sec = end.tv_sec - start.tv_sec;
+    long usec = end.tv_usec - start.tv_usec;
+    if (usec < 0) { sec--; usec += 1000000; }
+
+    printf("\nSorted Numbers are: \n");
+    for (k = 0; k < n; k++) printf("%d\t", a[k]);
+    printf("\nTime taken is: %ld seconds and %ld microseconds\n", sec, usec);
+
+    return 0;
+}
+
+
+
+//output
+
+Enter How many Numbers: 15
+
+
+
+///12
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int a[30], count = 0;
+
+int place(int pos) {
+    for (int i = 1; i < pos; i++)
+        if (a[i] == a[pos] || abs(a[i] - a[pos]) == abs(i - pos)) return 0;
+    return 1;
+}
+
+void print_sol(int n) {
+    printf("\n\nSolution #%d:\n", ++count);
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) printf("%s", (a[i] == j) ? "Q\t" : "*\t");
+        printf("\n");
+    }
+}
+
+void queen(int n) {
+    int k = 1; a[k] = 0;
+    while (k > 0) {
+        a[k]++;
+        while (a[k] <= n && !place(k)) a[k]++;
+        if (a[k] <= n) {
+            if (k == n) print_sol(n);
+            else a[++k] = 0;
+        } else k--;
+    }
+}
+
+int main() {
+    int n;
+    printf("Enter the number of Queens: ");
+    if (scanf("%d", &n) != 1) return 1;
+    queen(n);
+    printf("\nTotal solutions = %d\n", count);
+    return 0;
+}
+
+
+Enter How many queens: 4
